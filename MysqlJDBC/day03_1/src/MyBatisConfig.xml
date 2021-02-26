@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis的DTD约束-->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--configuration 核心根标签-->
+<configuration>
+    <!--引入数据库连接的配置文件-->
+    <properties resource="jdbc.properties"/>
+    <!--配置LOG4J-->
+    <settings>
+        <setting name="logImpl" value="log4j"/>
+    </settings>
+    <!--起别名-->
+    <typeAliases>
+        <!--        给类起别名后面跟类的别名-->
+        <typeAlias type="com.itheima.bean.Student" alias="student"/>
+        <!--给包取别名，这样就相当于给这个包下的所有类都起了别名，别名为类名的全小写-->
+        <!--<package name="com.itheima.bean"/>-->
+    </typeAliases>
+    <!--environments配置数据库环境，环境可以有多个。default属性指定使用的是哪个-->
+    <environments default="mysql">
+        <!--environment配置数据库环境  id属性唯一标识-->
+        <environment id="mysql">
+            <!-- transactionManager事务管理。  type属性，采用JDBC默认的事务-->
+            <transactionManager type="JDBC"/>
+            <!-- dataSource数据源信息   type属性 连接池-->
+            <dataSource type="POOLED">
+                <!-- property获取数据库连接的配置信息 -->
+                <!--                ${}表示从配置文件读取到的信息-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--    此处代码被上面优化-->
+    <!--        &lt;!&ndash;environment配置数据库环境  id属性唯一标识&ndash;&gt;
+            <environment id="mysql">
+                &lt;!&ndash; transactionManager事务管理。  type属性，采用JDBC默认的事务&ndash;&gt;
+                <transactionManager type="JDBC"/>
+                &lt;!&ndash; dataSource数据源信息   type属性 连接池&ndash;&gt;
+                <dataSource type="POOLED">
+                    &lt;!&ndash; property获取数据库连接的配置信息 &ndash;&gt;
+                    <property name="driver" value="com.mysql.jdbc.Driver"/>
+                    <property name="url" value="jdbc:mysql://192.168.200.129/db12"/>
+                    <property name="username" value="root"/>
+                    <property name="password" value="123456"/>
+                </dataSource>
+            </environment>
+        </environments>-->
+    <!-- mappers引入映射配置文件 -->
+    <mappers>
+        <!-- mapper 引入指定的映射配置文件   resource属性指定映射配置文件的名称 -->
+        <mapper resource="StudentMapper.xml"/>
+    </mappers>
+</configuration>

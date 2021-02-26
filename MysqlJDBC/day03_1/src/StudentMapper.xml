@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis的DTD约束-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    mapper：核心根标签
+    namespace属性：名称空间
+-->
+<mapper namespace="StudentMapper">
+    <!--
+    select：查询功能的标签
+    id属性：唯一标识
+    resultType属性：指定结果映射对象类型要写全类名
+    parameterType属性：指定参数映射对象类型
+-->
+    <select id="selectAll" resultType="student">
+        SELECT * FROM Student
+    </select>
+    <select id="selectById" resultType="student" parameterType="int">
+        SELECT * FROM Student WHERE sid = #{sid}
+    </select>
+    <!--insert中配置因为resultType属性返回的只能是Integer类型，所以省略了resultType属性的书写，在调用的时候能够接收到resultType返回值，所以这里省略-->
+    <insert id="insert" parameterType="student">
+        INSERT INTO Student VALUES (#{sid},#{name},#{age})
+    </insert>
+    <!--insert中配置因为resultType属性返回的只能是Integer类型，所以省略了resultType属性的书写，在调用的时候能够接收到resultType返回值，所以这里省略-->
+    <update id="update" parameterType="student">
+        UPDATE Student SET name = #{name},age=#{age} WHERE sid=#{sid}
+    </update>
+    <!--insert中配置因为resultType属性返回的只能是Integer类型，所以省略了resultType属性的书写，在调用的时候能够接收到resultType返回值，所以这里省略-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM Student WHERE sid = #{sid}
+    </delete>
+</mapper>
