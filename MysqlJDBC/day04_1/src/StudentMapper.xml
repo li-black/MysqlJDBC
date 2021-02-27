@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis的DTD约束-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    mapper：核心根标签
+    namespace属性：名称空间
+-->
+<!--采用接口代理必须传入要代理接口的全类名-->
+<!--1.Mapper.xml文件中的namespace与mapper接口的全限定名相同-->
+<!--2.Mapper接口方法名和Mapper.xml中定义的每个statement的id相同-->
+<!--3.Mapper接口方法的输入参数类型和mapper.xml中定义的每个sql的parameterType的类型相同-->
+<!--4.Mapper接口方法的输出参数类型和mapper.xml中定义的每个sql的resultType的类型相同-->
+<mapper namespace="com.itheima.mapper.StudentMapper">
+
+    <!--
+        select：查询功能的标签
+        id属性：唯一标识
+        resultType属性：指定结果映射对象类型
+        parameterType属性：指定参数映射对象类型
+    -->
+    <sql id="selectStudent">SELECT * FROM Student</sql>
+    <select id="selectAll" resultType="student">
+        <include refid="selectStudent"></include>
+    </select>
+
+    <select id="selectById" resultType="student" parameterType="int">
+        <include refid="selectStudent"></include>
+        WHERE sid = #{sid}
+    </select>
+
+    <insert id="insert" parameterType="student">
+        INSERT INTO Student VALUES (#{sid},#{name},#{age})
+    </insert>
+
+    <update id="update" parameterType="student">
+        UPDATE Student SET name = #{name},age = #{age} WHERE sid = #{sid}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM Student WHERE sid = #{sid}
+    </delete>
+
+    <select id="selectByNameOrAge" resultType="student">
+        <include refid="selectStudent"></include>
+        WHERE NAME = #{name} OR age = #{age}
+    </select>
+
+    <select id="selectCondition" parameterType="student" resultType="student">
+        <include refid="selectStudent"></include>
+        <where>
+            <if test="sid != null">
+                sid = #{sid}
+            </if>
+            <if test="name != null">
+                AND NAME = #{name}
+            </if>
+            <if test="age != null">
+                AND age = #{age}
+            </if>
+        </where>
+    </select>
+    <!--（1）如果传入的是单参数且参数类型是一个List的时候，collection属性值为list .
+        （2）如果传入的是单参数且参数类型是一个array数组的时候，collection的属性值为array .
+        （3）如果传入的参数是多个的时候，我们就需要把它们封装成一个Map了，当然单参数也可以封装成map，
+        实际上如果你在传入参数的时候，在MyBatis里面也是会把它封装成一个Map的，map的key就是参数名，
+        所以这个时候collection属性值就是传入的List或array对象在自己封装的map里面的key.-->
+    <!--    这里传的是集合用list如果是数组要用arraylist如果多个用map-->
+
+    <select id="selectByIds" parameterType="list" resultType="student">
+        <include refid="selectStudent"></include>
+        <where>
+            <foreach collection="list" open="sid IN(" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+</mapper>

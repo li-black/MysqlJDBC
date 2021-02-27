@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis的DTD约束-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    mapper：核心根标签
+    namespace属性：名称空间
+-->
+<!--采用接口代理必须传入要代理接口的全类名-->
+<!--1.Mapper.xml文件中的namespace与mapper接口的全限定名相同-->
+<!--2.Mapper接口方法名和Mapper.xml中定义的每个statement的id相同-->
+<!--3.Mapper接口方法的输入参数类型和mapper.xml中定义的每个sql的parameterType的类型相同-->
+<!--4.Mapper接口方法的输出参数类型和mapper.xml中定义的每个sql的resultType的类型相同-->
+<mapper namespace="com.itheima.mapper.OneToOneMapper">
+
+    <resultMap id="OneToOne" type="card">
+        <id column="pid" property="id"/>
+        <result column="number" property="number"/>
+        <!--        association只针对于一对一的查询
+                id为主键-->
+        <association property="p" javaType="person">
+            <id column="pid" property="id"/>
+            <result column="NAME" property="NAME"/>
+            <result column="age" property="age"/>
+        </association>
+    </resultMap>
+
+    <!--    一对一查询-->
+    <select id="selectAll" resultMap="OneToOne">
+        SELECT
+        c.id cid,
+        number,
+        pid,
+        `NAME`,
+        age
+        FROM
+        card c,
+        person p
+        WHERE
+        c.pid = p.id
+    </select>
+
+</mapper>
