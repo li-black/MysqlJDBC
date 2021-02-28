@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis的DTD约束-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.StudentDao">
+    <resultMap id="Student" type="student">
+        <id column="sid" property="sid"/>
+        <result column="NAME" property="name"/>
+        <result column="age" property="age"/>
+        <result column="birthday" property="birthday" javaType="java.sql.Date" jdbcType="DATE"/>
+    </resultMap>
+    <select id="findAll" resultMap="Student">
+        SELECT * FROM student
+    </select>
+    <select id="findById" resultMap="Student" parameterType="int">
+        SELECT * FROM student WHERE sid=#{sid}
+    </select>
+    <insert id="insert" parameterType="Student">
+        INSERT INTO student (NAME,age,birthday) VALUE (#{name},#{age},#{birthday})
+    </insert>
+    <update id="update" parameterType="Student">
+        UPDATE student SET NAME=#{name},age=#{age},birthday=#{birthday} WHERE sid=#{sid}
+    </update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM student WHERE sid=#{sid}
+    </delete>
+</mapper>

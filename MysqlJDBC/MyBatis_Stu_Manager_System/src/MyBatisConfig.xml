@@ -8,15 +8,9 @@
     <!--引入数据库连接的配置文件-->
     <properties resource="jdbc.properties"/>
 
-    <!--配置LOG4J-->
-    <settings>
-        <setting name="logImpl" value="log4j"/>
-    </settings>
-
     <!--起别名-->
     <typeAliases>
-        <typeAlias type="com.itheima.bean.Student" alias="student"/>
-        <!--<package name="com.itheima.bean"/>-->
+        <package name="com.itheima.domain"/>
     </typeAliases>
 
     <!--environments配置数据库环境，环境可以有多个。default属性指定使用的是哪个-->
@@ -28,7 +22,7 @@
             <!-- dataSource数据源信息   type属性 连接池-->
             <dataSource type="POOLED">
                 <!-- property获取数据库连接的配置信息 -->
-                <property name="driver" value="${driver}"/>
+                <property name="driver" value="${driverClass}"/>
                 <property name="url" value="${url}"/>
                 <property name="username" value="${username}"/>
                 <property name="password" value="${password}"/>
@@ -38,7 +32,11 @@
 
     <!-- mappers引入映射配置文件 -->
     <mappers>
-        <!-- mapper 引入指定的映射配置文件   resource属性指定映射配置文件的名称 -->
+        <!-- mapper 引入指定的映射配置文件   class属性指定映射配置文件的全类名 -->
+<!--        <mapper class="com.itheima.mapper.one_to_one.CardMapper"/>-->
+<!--        <mapper class="com.itheima.mapper.one_to_one.PersonMapper"/>-->
+<!--        package后面跟路径能够找到这个路径下对应的配置文件-->
         <mapper resource="StudentMapper.xml"/>
     </mappers>
+
 </configuration>

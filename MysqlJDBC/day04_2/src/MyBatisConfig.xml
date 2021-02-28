@@ -18,17 +18,12 @@
         <package name="com.itheima.bean"/>
     </typeAliases>
 
-    <!--分页插件的配置-->
-    <plugins>
-        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
-    </plugins>
-
     <!--environments配置数据库环境，环境可以有多个。default属性指定使用的是哪个-->
     <environments default="mysql">
         <!--environment配置数据库环境  id属性唯一标识-->
         <environment id="mysql">
             <!-- transactionManager事务管理。  type属性，采用JDBC默认的事务-->
-            <transactionManager type="JDBC"></transactionManager>
+            <transactionManager type="JDBC"/>
             <!-- dataSource数据源信息   type属性 连接池-->
             <dataSource type="POOLED">
                 <!-- property获取数据库连接的配置信息 -->

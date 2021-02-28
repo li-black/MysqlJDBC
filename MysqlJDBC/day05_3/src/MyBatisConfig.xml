@@ -15,8 +15,7 @@
 
     <!--起别名-->
     <typeAliases>
-        <typeAlias type="com.itheima.bean.Student" alias="student"/>
-        <!--<package name="com.itheima.bean"/>-->
+        <package name="com.itheima.bean"/>
     </typeAliases>
 
     <!--environments配置数据库环境，环境可以有多个。default属性指定使用的是哪个-->
@@ -38,7 +37,11 @@
 
     <!-- mappers引入映射配置文件 -->
     <mappers>
-        <!-- mapper 引入指定的映射配置文件   resource属性指定映射配置文件的名称 -->
-        <mapper resource="StudentMapper.xml"/>
+        <!-- mapper 引入指定的映射配置文件   class属性指定映射配置文件的全类名 -->
+<!--        <mapper class="com.itheima.mapper.one_to_one.CardMapper"/>-->
+<!--        <mapper class="com.itheima.mapper.one_to_one.PersonMapper"/>-->
+<!--        package后面跟路径能够找到这个路径下对应的配置文件-->
+        <package name="com.itheima.mapper"/>
     </mappers>
+
 </configuration>
