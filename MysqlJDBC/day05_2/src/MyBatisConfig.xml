@@ -38,9 +38,9 @@
     <!-- mappers引入映射配置文件 -->
     <mappers>
         <!-- mapper 引入指定的映射配置文件   class属性指定映射配置文件的全类名 -->
-<!--        <mapper class="com.itheima.mapper.one_to_one.CardMapper"/>-->
-<!--        <mapper class="com.itheima.mapper.one_to_one.PersonMapper"/>-->
-<!--        package后面跟路径能够找到这个路径下对应的配置文件-->
+        <!--        <mapper class="com.itheima.mapper.one_to_one.CardMapper"/>-->
+        <!--        <mapper class="com.itheima.mapper.one_to_one.PersonMapper"/>-->
+        <!--        package后面跟路径能够找到这个路径下对应的配置文件-->
         <package name="com.itheima.mapper"/>
     </mappers>
 

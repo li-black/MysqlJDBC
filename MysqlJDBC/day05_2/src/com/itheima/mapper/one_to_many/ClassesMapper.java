@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.mapping.FetchType;
 
 import java.util.List;
 
@@ -22,7 +23,8 @@ public interface ClassesMapper {
                         many、@Many 一对多查询的固定写法
                         select属性：指定调用哪个接口中的哪个查询方法
                      */
-                    many = @Many(select = "com.itheima.mapper.one_to_many.StudentMapper.selectByCid")
+//                    fetchType参数传递为LAZY时启动懒加载模式，通过debugger显示不出来，能够通日志的打印信息看到懒加载的过程
+                    many = @Many(select = "com.itheima.mapper.one_to_many.StudentMapper.selectByCid", fetchType = FetchType.LAZY)
             )
     })
     List<Classes> selectAll();

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 用户实体类
+ *
  * @author 黑马程序员
  * @Company http://www.itheima.com
  */

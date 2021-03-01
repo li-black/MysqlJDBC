@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.mapping.FetchType;
 
 import java.util.List;
 
@@ -32,7 +33,9 @@ public interface CardMapper {
 //                    根据查询出来的pid
                     column = "pid",
 //                    去PersonMapper中调用根据id查询传入pid查询出Person
-                    one = @One(select = "com.itheima.mapper.one_to_one.PersonMapper.selectById"))
+//                    fetchType参数传递为LAZY时启动懒加载模式，通过debugger显示不出来，能够通日志的打印信息看到懒加载的过程
+//                    一般一对一查询不开启懒加载这里为了演示开启
+                    one = @One(select = "com.itheima.mapper.one_to_one.PersonMapper.selectById", fetchType = FetchType.LAZY))
     })
     List<Card> seleceAll();
 }

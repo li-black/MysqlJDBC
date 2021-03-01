@@ -22,10 +22,12 @@ public class MyBatisUtils {
         }
     }
 
+    //    返回自动提交的Session
     public static SqlSession getSession() {
         return sqlSessionFactory.openSession(true);
     }
 
+    //    返回手动提交的Session
     public static SqlSession getNoAutoSession() {
         return sqlSessionFactory.openSession();
     }
